@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="mediaquaries.css">
+        <title>Password generator</title>
+    </head>
+    <body>
+        <!-- Container for the button and dropdown -->
+        <div class="container">
+        <!-- "Generate Password" button -->
+        <button id="generatePasswordButton">Generate Password</button>
+
+        <!-- Dropdown menu -->
+        <select id="dropdown" name="dropdown">
+            <option value="Memorable">Memorable Password</option>
+            <option value="Random">Random Password</option>
+        </select>
+        </div>
+
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div>
+
+        <input type="checkbox" id="number" name="number">
+        <label for="Numbers">Numbers</label>
+
+        <input type="punctuation" id="punctuation" name="punctuation">
+        <label for="punctuation">Punctuation</label>
+
+
+
+
+
+
+        
+        <script src="script.js"></script>
+    </body>
+</html>
