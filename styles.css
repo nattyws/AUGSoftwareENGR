@@ -30,6 +30,10 @@ h1 {
     max-width: 60%; 
 }
 
+.inputLabelWrapper {
+    text-align: left;
+}
+
 
 .label {
     font-weight: bold;
@@ -44,19 +48,17 @@ h1 {
 }
 
 
-.readOnlyInput {
+.readOnlyParagraph {
     background-color: white;
     border: 0px;
     padding: 10px;
     border-radius: 5px;
     font-size: 100%;
-    line-height: 2rem;
+    line-height: 1.5rem;
     width: 50vw;
     text-align: center;
-    -ms-box-sizing:content-box;
-    -moz-box-sizing:content-box;
-    -webkit-box-sizing:content-box; 
-    box-sizing:content-box;
+    word-break: break-all;
+    margin-top: 0;
 
 
 
