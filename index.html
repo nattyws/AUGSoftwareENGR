@@ -5,6 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="mediaquaries.css">
+        <script src="index.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
         <title>Password generator</title>
     </head>
     <body>
@@ -40,11 +45,12 @@
         </select>
         </div>
 
-        <div>
+        <div class="container1">
             <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="10" class="slider" id="myRange">
-                <ouput>10</ouput>
+                <input type="range" min="1" max="25" value="1" class="slider" id="myRange">
+                <p> <span id="ranges"></span></p>
             </div>
+
 
             <input type="checkbox" id="number" name="number">
             <label for="Numbers">Numbers</label>
@@ -52,6 +58,7 @@
             <input type="checkbox" id="punctuation" name="punctuation">
             <label for="punctuation">Punctuation</label>
         </div>
+   
 
         <script src="script.js"></script>
     </body>
