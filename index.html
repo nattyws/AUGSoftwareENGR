@@ -38,11 +38,7 @@
         <!-- "Generate Password" button -->
         <button id="generatePasswordButton">Generate Password</button>
 
-        <!-- Dropdown menu -->
-        <select id="dropdown" name="dropdown">
-            <option value="Memorable">Memorable Password</option>
-            <option value="Random">Random Password</option>
-        </select>
+ 
         </div>
 
         <div class="container1">
@@ -51,12 +47,34 @@
                 <p> <span id="ranges"></span></p>
             </div>
 
+             <!-- Random checkboxes -->
+            <div id="randomDiv">
+                <input type="checkbox" id="number" name="number">
+                <label for="Numbers">Numbers</label>
 
-            <input type="checkbox" id="number" name="number">
-            <label for="Numbers">Numbers</label>
+                <input type="checkbox" id="symbols" name="symbols">
+                <label for="symbols">Symbols</label>
+            </div>
 
-            <input type="checkbox" id="punctuation" name="punctuation">
-            <label for="punctuation">Punctuation</label>
+            <!-- memorable checkboxes -->
+            <div id="memorableDiv">
+                <input type="checkbox" id="capitalize" name="capitalize">
+                <label for="capitalize">Capitalize</label>
+
+                <input type="checkbox" id="fullWords" name="fullWords">
+                <label for="fullWords">Full Words</label>
+            </div>
+           
+
+            <br>
+
+                   <!-- Dropdown menu -->
+            <select id="dropdown">
+                <option value="memorable">Memorable Password</option>
+                <option value="random" selected="selected">Random Password</option>
+                <option value="select" selected="selected">Select</option>
+            </select>
+
         </div>
    
 
