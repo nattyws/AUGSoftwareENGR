@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", genPassword);
 
 function genPassword(){
-    const dictionaryAPIURL = 'https://random-word-api.herokuapp.com/word';
+    const dictionaryAPIURL = 'https://random-word-api.herokuapp.com/word?length=5';
     console.log(dictionaryAPIURL)
     const passwordOutput = document.getElementById('pwtextbox');
     const generatePasswordBtn = document.getElementById('generatePasswordButton');
