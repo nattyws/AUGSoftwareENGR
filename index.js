@@ -29,17 +29,118 @@ function genPassword(){
       console.log(dropdownMenu.options[dropdownMenu.selectedIndex].value);
 
       var selectedOption = dropdownMenu.options[dropdownMenu.selectedIndex].value;
-      var memorable = document.getElementById("memorableDiv");
-      var random = document.getElementById("randomDiv");
+      // var memorable = document.getElementById("memorableDiv");
+      // var random = document.getElementById("randomDiv");
+      var sharedDiv = document.getElementById("sharedDiv");
+
+      console.log(sharedDiv);
+
+
+      
+
+       
+
+
+
+
+
+
+
+
+      
+
+
+
+
+
+      //Getting all the elements that I created, so that I can hide or show base on the obtion selected
+          // All memerable elements
+      
+
+      // All random elements
+      
+
+
+
+
+   
+
 
       if (selectedOption === 'random') {
-        memorable.style.display = 'none';
-        random.style.display = 'inline';
+
+        //clear the sharedDiv
+        document.getElementById("sharedDiv").innerHTML = "";
+        
+        //create Numbers and Sympoles checkboxes
+         // This checkbox is for random numbers
+        var numberCheckbox = document.createElement('input');
+        numberCheckbox.type = "checkbox";
+        numberCheckbox.name = "number";
+        numberCheckbox.value = "randomNumber";
+        numberCheckbox.id = "number";
+        var labelNum = document.createElement('label')
+        labelNum.htmlFor = "number";
+        labelNum.id = "random";
+        labelNum.appendChild(document.createTextNode('Numbers'));
+
+        // This checkbox is for random symbols
+        var symbolsCheckbox = document.createElement('input');
+        symbolsCheckbox.type = "checkbox";
+        symbolsCheckbox.name = "symbols";
+        symbolsCheckbox.value = "randomSymbol";
+        symbolsCheckbox.id = "symbols";
+        var labelSymbol = document.createElement('label')
+        labelSymbol.htmlFor = "symbols";
+        labelSymbol.id = "random2";
+        labelSymbol.appendChild(document.createTextNode('Symbols'));
+
+        sharedDiv.appendChild(numberCheckbox);
+        sharedDiv.appendChild(labelNum);
+
+        sharedDiv.appendChild(symbolsCheckbox);
+        sharedDiv.appendChild(labelSymbol);
 
       }
       else if (selectedOption === 'memorable') {
-        random.style.display = 'none';
-        memorable.style.display = 'inline';
+
+        //clear the sharedDiv
+        document.getElementById("sharedDiv").innerHTML = "";
+
+
+        //create Numbers and Sympoles checkboxes
+          // This checkbox is for memorable capitalize
+        var capitalizeCheckbox = document.createElement('input');
+        capitalizeCheckbox.type = "checkbox";
+        capitalizeCheckbox.name = "capitalize";
+        capitalizeCheckbox.value = "Memorablecapitalize";
+        capitalizeCheckbox.id = "capitalize";
+        var labelCab = document.createElement('label')
+        labelCab.htmlFor = "capitalize";
+        labelCab.id = "memo1";
+        labelCab.appendChild(document.createTextNode('Capitalize'));
+
+
+        // This checkbox is for memorable full Words
+        var fullWordsCheckbox = document.createElement('input');
+        fullWordsCheckbox.type = "checkbox";
+        fullWordsCheckbox.name = "fullWords";
+        fullWordsCheckbox.value = "MemorablefullWords";
+        fullWordsCheckbox.id = "fullWords";
+        var labelFull = document.createElement('label')
+        labelFull.htmlFor = "fullWords";
+        labelFull.id = "memo2";
+        labelFull.appendChild(document.createTextNode('Full Words'));
+
+        sharedDiv.appendChild(capitalizeCheckbox);
+        sharedDiv.appendChild(labelCab);
+
+        sharedDiv.appendChild(fullWordsCheckbox);
+        sharedDiv.appendChild(labelFull);
+
+
+
+
+        
 
         
         // Function to fetch a random word from the dictionary API
@@ -78,10 +179,8 @@ function genPassword(){
         generatePasswordBtn.addEventListener('click', generateMemPassword);
 
       } else {
-        random.style.display = 'none';
-        memorable.style.display = 'none';
-
-
+       //clear the sharedDiv
+        document.getElementById("sharedDiv").innerHTML = "";
       }
     })
 

@@ -90,6 +90,7 @@ h1 {
     /* position: absolute;
     top: 100%;
     left: 0; */
+    margin-top: 5px;
     padding: 5px;
     font-size: 14px;
 }
@@ -114,7 +115,8 @@ h1 {
 
 
   /* Mohamed Ali's changes for drop down Menu */
-.randomDiv {
+.sharedDiv {
+    /* margin-top: 50px; */
     margin-bottom: 0;
 }
 
