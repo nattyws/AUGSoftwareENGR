@@ -39,6 +39,9 @@ h1 {
     font-weight: bold;
     margin-right: 200px;
 }
+
+
+
 .sectionOne{
     display: flex;
     flex-direction: column;
@@ -46,6 +49,20 @@ h1 {
     align-items: center; 
     margin-top: 50px;
 }
+#savePasswordButton {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1200px;
+    margin-top: 45px; /* Adjust the margin-top to move it down */
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+
 
 
 .readOnlyParagraph {
@@ -75,6 +92,18 @@ h1 {
     border-radius: 5px;
     margin-top: 10px;
 }
+
+#copyPasswordButton {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+
+}
+
 
 /* Style for the container that holds both the button and dropdown */
 .container {
@@ -118,7 +147,33 @@ h1 {
 .sharedDiv {
     /* margin-top: 50px; */
     margin-bottom: 0;
+
+    /* khadro change */
 }
+
+#savedPasswordsSection {
+  
+    margin-top: -300px; /* Adjusted the negative margin to move it up */
+    margin-left: 1200px; 
+}
+
+#savedPasswordsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#savedPasswordsList li {
+    font-size: 18px;
+    margin: 5px;
+}
+
+
+#savedPasswordsSection h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+
 
   
 
