@@ -10,13 +10,22 @@
         crossorigin="anonymous"></script>
         <script src="index.js"></script>
 
+    
         <title>Password generator</title>
     </head>
     <body>
 
+       
+
         <section class="sectionOne">
+            <div class="savePasswordContainer">
+          
+                <button id="savePasswordButton"> Saved Passwords</button>
+    
+            </div>
             <h1>PASSWORD GENERATOR</h1>
             <br>
+        
 
             <p class="firstP">Need a secure password?
                 Try Generating Either 
@@ -28,18 +37,28 @@
                 <p class="readOnlyParagraph" id = "pwtextbox"></p>
             </div>
 
+            
+
           
 
 
         </section>
+
+       
 
         <!-- Container for the button and dropdown -->
         <div class="container">
         <!-- "Generate Password" button -->
         <button id="generatePasswordButton">Generate Password</button>
 
- 
+           
         </div>
+       <!-- "Copy Password" button -->
+            <button id="copyPasswordButton">Copy Password</button>
+
+
+ 
+     </div>
 
         <div class="container1">
             <div class="slidecontainer">
@@ -67,6 +86,12 @@
             </select>
 
         </div>
+
+           <!-- Section for displaying saved passwords -->
+    <section id="savedPasswordsSection">
+        <h2>Saved Passwords</h2>
+        <ul id="savedPasswordsList"></ul>
+    </section>
    
 
     </body>
