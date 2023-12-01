@@ -9,8 +9,8 @@ function genPassword() {
     const passwordOutput = document.getElementById('pwtextbox');
     const generatePasswordBtn = document.getElementById('generatePasswordButton');
     const passwordLengthSlider = document.getElementById('myRange');
-    const includeSymbolsCheckbox = document.getElementById('symbols');
-    const includeNumbersCheckbox = document.getElementById('number');
+    // const includeSymbolsCheckbox = document.getElementById('symbols');
+    // const includeNumbersCheckbox = document.getElementById('number');
     const savedPasswordsBtn = document.getElementById('savePasswordButton');
     const copyPasswordBtn = document.getElementById('copyPasswordButton');
    
@@ -24,22 +24,41 @@ function genPassword() {
         output.innerHTML = this.value;
     }
 
+
+
+
+    
+
+  
+
+    
+
+   
+
+
+
+
+
+
+
     var dropdownMenu = document.getElementById("dropdown");
     dropdownMenu.addEventListener('change', () => {
         var selectedOption = dropdownMenu.options[dropdownMenu.selectedIndex].value;
         var sharedDiv = document.getElementById("sharedDiv");
 
-        // Getting all the elements that I created, so that I can hide or show based on the option selected
 
-        if (selectedOption === 'random') {
-            document.getElementById("sharedDiv").innerHTML = "";
-        //create Numbers and Sympoles checkboxes
-         // This checkbox is for random numbers
+
+
+
+
+
+        // This checkbox is for random numbers
             var numberCheckbox = document.createElement('input');
             numberCheckbox.type = "checkbox";
             numberCheckbox.name = "number";
             numberCheckbox.value = "randomNumber";
             numberCheckbox.id = "number";
+            // numberCheckbox.checked = false;
             var labelNum = document.createElement('label')
             labelNum.htmlFor = "number";
             labelNum.id = "random";
@@ -55,11 +74,134 @@ function genPassword() {
             labelSymbol.id = "random2";
             labelSymbol.appendChild(document.createTextNode('Symbols'));
 
+
+            /** 
+             * generateRandomPassByButton is a function which you can generate a random password using the generate button
+            */
+            function generateRandomPassByButton() {
+                const numbers = document.getElementById('number').checked;
+                const symbols = document.getElementById('symbols').checked;
+                const theLengthOfThePassowrd = passwordLengthSlider.value;
+
+                if (numbers && symbols) {
+                    console.log("Both numbers and symbols were checked");
+                    const listOfSymbols = "!@#$%^&*()_-~";
+                    let result = '';
+                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                        randomNumber = Math.floor(Math.random() * 100);
+                        pickSymbolRandomly = Math.floor(Math.random() * 13);
+                        result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
+                    }
+                    passwordOutput.textContent = result;
+
+
+
+                }else if (numbers && !symbols) {
+                    console.log("only numbers was checked");
+                     let result = '';
+                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                        randomNumber = Math.floor(Math.random() * 100);
+                        result += randomNumber + "-";
+                    }
+                    passwordOutput.textContent = result;
+                }else if (!numbers && symbols) {
+                    console.log("only symbols was checked");
+                    const listOfSymbols = "!@#$%^&*()_-~";
+                    let result = '';
+
+                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                        pickSymbolRandomly = Math.floor(Math.random() * 13);
+                        result += listOfSymbols.charAt(pickSymbolRandomly)  
+                    }
+                    passwordOutput.textContent = result;
+                }
+
+            }
+
+
+
+
+
+            /**
+             * generateRandomPassBySlider is a function which you can generate a random password using the slider range.
+             */
+            function generateRandomPassBySlider() {
+                const numbers = document.getElementById('number').checked;
+                const symbols = document.getElementById('symbols').checked;
+                const theLengthOfThePassowrd = passwordLengthSlider.value;
+
+                if (numbers && symbols) {
+                    console.log("Both numbers and symbols were checked");
+                    const listOfSymbols = "!@#$%^&*()_-~";
+                    let result = '';
+                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                        randomNumber = Math.floor(Math.random() * 100);
+                        pickSymbolRandomly = Math.floor(Math.random() * 13);
+                        result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
+                    }
+                    passwordOutput.textContent = result;
+
+                }else if (numbers && !symbols) {
+                    console.log("only numbers was checked");
+                     let result = '';
+                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                        randomNumber = Math.floor(Math.random() * 100);
+                        result += randomNumber + "-";
+                    }
+                    passwordOutput.textContent = result;
+                }else if (!numbers && symbols) {
+                    console.log("only symbols was checked");
+                    const listOfSymbols = "!@#$%^&*()_-~";
+                    let result = '';
+
+                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                        pickSymbolRandomly = Math.floor(Math.random() * 13);
+                        result += listOfSymbols.charAt(pickSymbolRandomly)  
+                    }
+                    passwordOutput.textContent = result;
+                }
+                
+
+            }
+
+       
+
+        if (selectedOption === 'random') {
+            document.getElementById("sharedDiv").innerHTML = "";
+            //create Numbers and Sympoles checkboxes
+         
+
             sharedDiv.appendChild(numberCheckbox);
             sharedDiv.appendChild(labelNum);
 
             sharedDiv.appendChild(symbolsCheckbox);
             sharedDiv.appendChild(labelSymbol);
+
+            generatePasswordBtn.addEventListener("click", generateRandomPassByButton);
+            passwordLengthSlider.addEventListener("click", generateRandomPassBySlider);
+
+            
+
+
+            
+
+
+
+
+            
+            
+
+
+
+
+            
+
+
+
+
+
+
+
 
         } else if (selectedOption === 'memorable') {
             document.getElementById("sharedDiv").innerHTML = "";
@@ -130,10 +272,28 @@ function genPassword() {
 
           generatePasswordBtn.addEventListener('click', generateMemPassword);
 
-      } else {
+        } else {
           document.getElementById("sharedDiv").innerHTML = "";
-      }
+        }
+
+
+
+       
+
+
   });
+
+
+
+  
+
+
+
+
+
+
+
+
 
   savedPasswordsBtn.addEventListener('click', displaySavedPasswords);
 
@@ -193,6 +353,10 @@ function genPassword() {
   function getSavedPasswords() {
       return JSON.parse(localStorage.getItem('passwords')) || [];
   }
+
+
+
+
 }
 
 
@@ -209,28 +373,4 @@ function genPassword() {
   
 
 
-  // //  Mohamed Ali's changes
-  // var dropdownMenu = document.getElementById("dropdown");
-  // dropdownMenu.addEventListener ('change', () => {
-  //   console.log(dropdownMenu.options[dropdownMenu.selectedIndex].value);
-
-  //   var selectedOption = dropdownMenu.options[dropdownMenu.selectedIndex].value;
-  //    var memorable = document.getElementById("memorableDiv");
-  //    var random = document.getElementById("randomDiv");
-  //   if (selectedOption === 'random') {
-  //     memorable.style.display = 'none';
-  //     random.style.display = 'inline';
-
-  //   }
-  //   else if (selectedOption === 'memorable') {
-  //     random.style.display = 'none';
-  //     memorable.style.display = 'inline';
-
-  //   } else {
-  //     random.style.display = 'none';
-  //     memorable.style.display = 'none';
-
-  //   }
-  // })
-
-
+  
