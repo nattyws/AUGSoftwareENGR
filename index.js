@@ -38,6 +38,8 @@ function genPassword() {
 
 
         if (selectedOption === 'random') {
+
+            passwordOutput.innerHTML = "";
         // This checkbox is for random numbers
             var numberCheckbox = document.createElement('input');
             numberCheckbox.type = "checkbox";
@@ -193,6 +195,7 @@ async function generateRandomPassBySlider() {
 
        
         } else if (selectedOption === 'memorable') {
+             passwordOutput.innerHTML = "";
             document.getElementById("sharedDiv").innerHTML = "";
 
 
