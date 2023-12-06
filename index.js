@@ -33,71 +33,11 @@ function genPassword() {
         var sharedDiv = document.getElementById("sharedDiv");
        
 
+
+
+
+
         if (selectedOption === 'random') {
-          // This checkbox is for random numbers
-          var numberCheckbox = document.createElement('input');
-          numberCheckbox.type = "checkbox";
-          numberCheckbox.name = "number";
-          numberCheckbox.value = "randomNumber";
-          numberCheckbox.id = "number";
-          // numberCheckbox.checked = false;
-          var labelNum = document.createElement('label')
-          labelNum.htmlFor = "number";
-          labelNum.id = "random";
-          labelNum.appendChild(document.createTextNode('Numbers'));
-           // This checkbox is for random symbols
-          var symbolsCheckbox = document.createElement('input');
-          symbolsCheckbox.type = "checkbox";
-          symbolsCheckbox.name = "symbols";
-          symbolsCheckbox.value = "randomSymbol";
-          symbolsCheckbox.id = "symbols";
-          var labelSymbol = document.createElement('label')
-          labelSymbol.htmlFor = "symbols";
-          labelSymbol.id = "random2";
-          labelSymbol.appendChild(document.createTextNode('Symbols'));
-
-
-          /** 
-           * generateRandomPassByButton is a function which you can generate a random password using the generate button
-          */
-          function generateRandomPassByButton() {
-              const numbers = document.getElementById('number').checked;
-              const symbols = document.getElementById('symbols').checked;
-              const theLengthOfThePassowrd = passwordLengthSlider.value;
-
-              if (numbers && symbols) {
-                  console.log("Both numbers and symbols were checked");
-                  const listOfSymbols = "!@#$%^&*()_-~";
-                  let result = '';
-                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                      randomNumber = Math.floor(Math.random() * 100);
-                      pickSymbolRandomly = Math.floor(Math.random() * 13);
-                      result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
-                  }
-                  passwordOutput.textContent = result;
-
-              }else if (numbers && !symbols) {
-                  console.log("only numbers was checked");
-                   let result = '';
-                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                      randomNumber = Math.floor(Math.random() * 100);
-                      result += randomNumber + "-";
-                  }
-                  passwordOutput.textContent = result;
-              }else if (!numbers && symbols) {
-                  console.log("only symbols was checked");
-                  const listOfSymbols = "!@#$%^&*()_-~";
-                  let result = '';
-
-                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                      pickSymbolRandomly = Math.floor(Math.random() * 13);
-                      result += listOfSymbols.charAt(pickSymbolRandomly)  
-                  }
-                  passwordOutput.textContent = result;
-              }
-
-          }
-
         // This checkbox is for random numbers
             var numberCheckbox = document.createElement('input');
             numberCheckbox.type = "checkbox";
@@ -121,131 +61,121 @@ function genPassword() {
             labelSymbol.appendChild(document.createTextNode('Symbols'));
 
 
+
+
+     
+
+         
+
             /** 
              * generateRandomPassByButton is a function which you can generate a random password using the generate button
             */
-            function generateRandomPassByButton() {
-                const numbers = document.getElementById('number').checked;
-                const symbols = document.getElementById('symbols').checked;
-                const theLengthOfThePassowrd = passwordLengthSlider.value;
+          // ...
 
-                if (numbers && symbols) {
-                    console.log("Both numbers and symbols were checked");
-                    const listOfSymbols = "!@#$%^&*()_-~";
-                    let result = '';
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        randomNumber = Math.floor(Math.random() * 100);
-                        pickSymbolRandomly = Math.floor(Math.random() * 13);
-                        result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
-                    }
-                    passwordOutput.textContent = result;
+let result; // Declare result in a common scope
+/** 
+ * generateRandomPassByButton is a function which you can generate a random password using the generate button
+ */
+async function generateRandomPassByButton() {
+    const numbers = document.getElementById('number').checked;
+    const symbols = document.getElementById('symbols').checked;
+    const theLengthOfThePassowrd = passwordLengthSlider.value;
 
-                    console.log("Random password is:" + result);
+    if (numbers && symbols) {
+        console.log("Both numbers and symbols were checked");
+        const listOfSymbols = "!@#$%^&*()_-~";
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            randomNumber = Math.floor(Math.random() * 100);
+            pickSymbolRandomly = Math.floor(Math.random() * 13);
+            result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
+        }
+        passwordOutput.textContent = result;
+    } else if (numbers && !symbols) {
+        console.log("only numbers was checked");
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            randomNumber = Math.floor(Math.random() * 100);
+            result += randomNumber + "-";
+        }
+        passwordOutput.textContent = result;
+    } else if (!numbers && symbols) {
+        console.log("only symbols was checked");
+        const listOfSymbols = "!@#$%^&*()_-~";
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            pickSymbolRandomly = Math.floor(Math.random() * 13);
+            result += listOfSymbols.charAt(pickSymbolRandomly);
+        }
+        passwordOutput.textContent = result;
+    }
 
-                }else if (numbers && !symbols) {
-                    console.log("only numbers was checked");
-                     let result = '';
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        randomNumber = Math.floor(Math.random() * 100);
-                        result += randomNumber + "-";
-                    }
-                    passwordOutput.textContent = result;
-                }else if (!numbers && symbols) {
-                    console.log("only symbols was checked");
-                    const listOfSymbols = "!@#$%^&*()_-~";
-                    let result = '';
+    await savePasswordToLocalStorage(result);
+}
+ console.log("Random password is:" + result);
 
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        pickSymbolRandomly = Math.floor(Math.random() * 13);
-                        result += listOfSymbols.charAt(pickSymbolRandomly)  
-                    }
-                    passwordOutput.textContent = result;
-                  
-                }
-               
+   // This checkbox is for random numbers
+   var numberCheckbox = document.createElement('input');
+   numberCheckbox.type = "checkbox";
+   numberCheckbox.name = "number";
+   numberCheckbox.value = "randomNumber";
+   numberCheckbox.id = "number";
+   // numberCheckbox.checked = false;
+   var labelNum = document.createElement('label')
+   labelNum.htmlFor = "number";
+   labelNum.id = "random";
+   labelNum.appendChild(document.createTextNode('Numbers'));
+    // This checkbox is for random symbols
+   var symbolsCheckbox = document.createElement('input');
+   symbolsCheckbox.type = "checkbox";
+   symbolsCheckbox.name = "symbols";
+   symbolsCheckbox.value = "randomSymbol";
+   symbolsCheckbox.id = "symbols";
+   var labelSymbol = document.createElement('label')
+   labelSymbol.htmlFor = "symbols";
+   labelSymbol.id = "random2";
+   labelSymbol.appendChild(document.createTextNode('Symbols'));
 
-            }
+/**
+ * generateRandomPassBySlider is a function which you can generate a random password using the slider range.
+ */
+async function generateRandomPassBySlider() {
+    const numbers = document.getElementById('number').checked;
+    const symbols = document.getElementById('symbols').checked;
+    const theLengthOfThePassowrd = passwordLengthSlider.value;
 
+    if (numbers && symbols) {
+        console.log("Both numbers and symbols were checked");
+        const listOfSymbols = "!@#$%^&*()_-~";
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            randomNumber = Math.floor(Math.random() * 100);
+            pickSymbolRandomly = Math.floor(Math.random() * 13);
+            result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
+        }
+        passwordOutput.textContent = result;
 
+    } else if (numbers && !symbols) {
+        console.log("only numbers was checked");
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            randomNumber = Math.floor(Math.random() * 100);
+            result += randomNumber + "-";
+        }
+        passwordOutput.textContent = result;
+    } else if (!numbers && symbols) {
+        console.log("only symbols was checked");
+        const listOfSymbols = "!@#$%^&*()_-~";
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            pickSymbolRandomly = Math.floor(Math.random() * 13);
+            result += listOfSymbols.charAt(pickSymbolRandomly);
+        }
+        passwordOutput.textContent = result;
+    }
 
-
-
-            /**
-             * generateRandomPassBySlider is a function which you can generate a random password using the slider range.
-             */
-            function generateRandomPassBySlider() {
-                const numbers = document.getElementById('number').checked;
-                const symbols = document.getElementById('symbols').checked;
-                const theLengthOfThePassowrd = passwordLengthSlider.value;
-
-                if (numbers && symbols) {
-                    console.log("Both numbers and symbols were checked");
-                    const listOfSymbols = "!@#$%^&*()_-~";
-                    let result = '';
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        randomNumber = Math.floor(Math.random() * 100);
-                        pickSymbolRandomly = Math.floor(Math.random() * 13);
-                        result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
-                    }
-                    passwordOutput.textContent = result;
-
-                    console.log("Random password is:" + result);
-
-                }else if (numbers && !symbols) {
-                    console.log("only numbers was checked");
-                     let result = '';
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        randomNumber = Math.floor(Math.random() * 100);
-                        result += randomNumber + "-";
-                    }
-                    passwordOutput.textContent = result;
-                }else if (!numbers && symbols) {
-                    console.log("only symbols was checked");
-                    const listOfSymbols = "!@#$%^&*()_-~";
-                    let result = '';
-
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        pickSymbolRandomly = Math.floor(Math.random() * 13);
-                        result += listOfSymbols.charAt(pickSymbolRandomly)  
-                    }
-                    passwordOutput.textContent = result;
-                    console.log("Random password is:" + generateRandomPassBySlider);
-                }
-                
-
-              if (numbers && symbols) {
-                  console.log("Both numbers and symbols were checked");
-                  const listOfSymbols = "!@#$%^&*()_-~";
-                  let result = '';
-                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                      randomNumber = Math.floor(Math.random() * 100);
-                      pickSymbolRandomly = Math.floor(Math.random() * 13);
-                      result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
-                  }
-                  passwordOutput.textContent = result;
-
-              }else if (numbers && !symbols) {
-                  console.log("only numbers was checked");
-                   let result = '';
-                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                      randomNumber = Math.floor(Math.random() * 100);
-                      result += randomNumber + "-";
-                  }
-                  passwordOutput.textContent = result;
-              }else if (!numbers && symbols) {
-                  console.log("only symbols was checked");
-                  const listOfSymbols = "!@#$%^&*()_-~";
-                  let result = '';
-
-                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                      pickSymbolRandomly = Math.floor(Math.random() * 13);
-                      result += listOfSymbols.charAt(pickSymbolRandomly)  
-                  }
-                  passwordOutput.textContent = result;
-              }
-              
-
-          }
+    await savePasswordToLocalStorage(result);
+}
 
             document.getElementById("sharedDiv").innerHTML = "";
             //create Numbers and Sympoles checkboxes
@@ -260,13 +190,8 @@ function genPassword() {
             generatePasswordBtn.addEventListener("click", generateRandomPassByButton);
             passwordLengthSlider.addEventListener("click", generateRandomPassBySlider);
 
-            
 
-
-            
-
-
-
+       
         } else if (selectedOption === 'memorable') {
             document.getElementById("sharedDiv").innerHTML = "";
 
@@ -433,11 +358,16 @@ function genPassword() {
   function getSavedPasswords() {
       return JSON.parse(localStorage.getItem('passwords')) || [];
   }
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
 
 
 
