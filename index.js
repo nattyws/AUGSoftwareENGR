@@ -22,36 +22,22 @@ function genPassword() {
 
     slider.oninput = function () {
         output.innerHTML = this.value;
+        console.log('Slider Value:', this.value);
     }
-
-
-
-
-    
-
-  
-
-    
-
-   
-
-
-
-
-
 
 
     var dropdownMenu = document.getElementById("dropdown");
     dropdownMenu.addEventListener('change', () => {
         var selectedOption = dropdownMenu.options[dropdownMenu.selectedIndex].value;
+        console.log('Selected Dropdown Option:', selectedOption);
         var sharedDiv = document.getElementById("sharedDiv");
+       
 
 
 
 
 
-
-
+        if (selectedOption === 'random') {
         // This checkbox is for random numbers
             var numberCheckbox = document.createElement('input');
             numberCheckbox.type = "checkbox";
@@ -73,6 +59,11 @@ function genPassword() {
             labelSymbol.htmlFor = "symbols";
             labelSymbol.id = "random2";
             labelSymbol.appendChild(document.createTextNode('Symbols'));
+
+
+
+
+     
 
          
 
@@ -121,6 +112,29 @@ async function generateRandomPassByButton() {
 
     await savePasswordToLocalStorage(result);
 }
+ console.log("Random password is:" + result);
+
+   // This checkbox is for random numbers
+   var numberCheckbox = document.createElement('input');
+   numberCheckbox.type = "checkbox";
+   numberCheckbox.name = "number";
+   numberCheckbox.value = "randomNumber";
+   numberCheckbox.id = "number";
+   // numberCheckbox.checked = false;
+   var labelNum = document.createElement('label')
+   labelNum.htmlFor = "number";
+   labelNum.id = "random";
+   labelNum.appendChild(document.createTextNode('Numbers'));
+    // This checkbox is for random symbols
+   var symbolsCheckbox = document.createElement('input');
+   symbolsCheckbox.type = "checkbox";
+   symbolsCheckbox.name = "symbols";
+   symbolsCheckbox.value = "randomSymbol";
+   symbolsCheckbox.id = "symbols";
+   var labelSymbol = document.createElement('label')
+   labelSymbol.htmlFor = "symbols";
+   labelSymbol.id = "random2";
+   labelSymbol.appendChild(document.createTextNode('Symbols'));
 
 /**
  * generateRandomPassBySlider is a function which you can generate a random password using the slider range.
@@ -163,7 +177,6 @@ async function generateRandomPassBySlider() {
     await savePasswordToLocalStorage(result);
 }
 
-        if (selectedOption === 'random') {
             document.getElementById("sharedDiv").innerHTML = "";
             //create Numbers and Sympoles checkboxes
          
@@ -178,8 +191,10 @@ async function generateRandomPassBySlider() {
             passwordLengthSlider.addEventListener("click", generateRandomPassBySlider);
 
 
+       
         } else if (selectedOption === 'memorable') {
             document.getElementById("sharedDiv").innerHTML = "";
+
 
             var capitalizeCheckbox = document.createElement('input');
             capitalizeCheckbox.type = "checkbox";
@@ -191,21 +206,23 @@ async function generateRandomPassBySlider() {
             labelCab.id = "memo1";
             labelCab.appendChild(document.createTextNode('Capitalize'));
 
-            var fullWordsCheckbox = document.createElement('input');
-            fullWordsCheckbox.type = "checkbox";
-            fullWordsCheckbox.name = "fullWords";
-            fullWordsCheckbox.value = "MemorablefullWords";
-            fullWordsCheckbox.id = "fullWords";
+            var numbersCheckbox = document.createElement('input');
+            numbersCheckbox.type = "checkbox";
+            numbersCheckbox.name = "numbers";
+            numbersCheckbox.value = "Memorablenumbers";
+            numbersCheckbox.id = "numbers";
             var labelFull = document.createElement('label')
-            labelFull.htmlFor = "fullWords";
+            labelFull.htmlFor = "numbers";
             labelFull.id = "memo2";
-            labelFull.appendChild(document.createTextNode('Full Words'));
+            labelFull.appendChild(document.createTextNode('Numbers'));
 
             sharedDiv.appendChild(capitalizeCheckbox);
             sharedDiv.appendChild(labelCab);
 
-            sharedDiv.appendChild(fullWordsCheckbox);
+            sharedDiv.appendChild(numbersCheckbox);
             sharedDiv.appendChild(labelFull);
+
+            
 
             async function fetchRandomWord() {
                 try {
@@ -220,6 +237,10 @@ async function generateRandomPassBySlider() {
 
             async function generateMemPassword() {
               const passwordLength = passwordLengthSlider.value;
+              console.log('Generating Memorable Password with Length:', passwordLength);
+              const numberized = document.getElementById('numbers').checked;
+              const capitalized = document.getElementById('capitalize').checked;
+
               let password = '';
           
               for (let i = 0; i < passwordLength; i++) {
@@ -237,9 +258,30 @@ async function generateRandomPassBySlider() {
                   }
               }
 
+              console.log('Generated Password:', password);
+              
+              if (capitalized && !numberized){
+                password = password.charAt(0).toUpperCase() + password.slice(1);
+              }
+              else if (!capitalized && numberized){
+                var randomNumber = (Math.floor(Math.random() * 100).toString());
+                password = password.concat(randomNumber)
+                
+              }
+              else if (!capitalized && !numberized){
+                password = password
+              }
+
+              else if(capitalized && numberized){
+                password = password.charAt(0).toUpperCase() + password.slice(1);
+                var randomNumber = (Math.floor(Math.random() * 100).toString());
+                password = password.concat(randomNumber)
+              }
+
+
               // Khadro work for saved password
           
-            await  savePasswordToLocalStorage(password);
+              savePasswordToLocalStorage(password);
           
               passwordOutput.textContent = password;
           }
@@ -247,28 +289,11 @@ async function generateRandomPassBySlider() {
 
           generatePasswordBtn.addEventListener('click', generateMemPassword);
 
-
         } else {
           document.getElementById("sharedDiv").innerHTML = "";
         }
 
-
-
-       
-
-
   });
-
-
-
-  
-
-
-
-
-
-
-
 
 
   savedPasswordsBtn.addEventListener('click', displaySavedPasswords);
@@ -287,14 +312,17 @@ async function generateRandomPassBySlider() {
     textarea.value = passwordValue;
     document.body.appendChild(textarea);
     textarea.select();
+    console.log('Copying Password:', passwordValue);
 
     // provides an alert for the user and also for me to see if it worked
 
     try {
         document.execCommand("copy");
         alert("Password copied to clipboard!");
+        console.log('Password copied to clipboard!');
     } catch (err) {
         console.error("Unable to copy to clipboard", err);
+        console.log('Error copying password to clipboard:', err);
     }
 
     document.body.removeChild(textarea);
@@ -306,6 +334,7 @@ async function generateRandomPassBySlider() {
   function displaySavedPasswords() {
       const savedPasswords = getSavedPasswords().slice(-10); // Get the last ten passwords
       const savedPasswordsList = document.getElementById('savedPasswordsList');
+      console.log('Saved Passwords:', savedPasswords);
 
       // Clear the existing list
       savedPasswordsList.innerHTML = "";
@@ -329,11 +358,16 @@ async function generateRandomPassBySlider() {
   function getSavedPasswords() {
       return JSON.parse(localStorage.getItem('passwords')) || [];
   }
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
 
 
 
