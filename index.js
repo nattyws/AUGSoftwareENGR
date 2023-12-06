@@ -22,6 +22,7 @@ function genPassword() {
 
     slider.oninput = function () {
         output.innerHTML = this.value;
+        console.log('Slider Value:', this.value);
     }
 
 
@@ -44,6 +45,7 @@ function genPassword() {
     var dropdownMenu = document.getElementById("dropdown");
     dropdownMenu.addEventListener('change', () => {
         var selectedOption = dropdownMenu.options[dropdownMenu.selectedIndex].value;
+        console.log('Selected Dropdown Option:', selectedOption);
         var sharedDiv = document.getElementById("sharedDiv");
 
 
@@ -94,7 +96,7 @@ function genPassword() {
                     }
                     passwordOutput.textContent = result;
 
-
+                    console.log("Random password is:" + result);
 
                 }else if (numbers && !symbols) {
                     console.log("only numbers was checked");
@@ -114,7 +116,9 @@ function genPassword() {
                         result += listOfSymbols.charAt(pickSymbolRandomly)  
                     }
                     passwordOutput.textContent = result;
+                  
                 }
+               
 
             }
 
@@ -141,6 +145,8 @@ function genPassword() {
                     }
                     passwordOutput.textContent = result;
 
+                    console.log("Random password is:" + result);
+
                 }else if (numbers && !symbols) {
                     console.log("only numbers was checked");
                      let result = '';
@@ -159,6 +165,7 @@ function genPassword() {
                         result += listOfSymbols.charAt(pickSymbolRandomly)  
                     }
                     passwordOutput.textContent = result;
+                    console.log("Random password is:" + generateRandomPassBySlider);
                 }
                 
 
@@ -206,6 +213,7 @@ function genPassword() {
         } else if (selectedOption === 'memorable') {
             document.getElementById("sharedDiv").innerHTML = "";
 
+
             var capitalizeCheckbox = document.createElement('input');
             capitalizeCheckbox.type = "checkbox";
             capitalizeCheckbox.name = "capitalize";
@@ -245,6 +253,7 @@ function genPassword() {
 
             async function generateMemPassword() {
               const passwordLength = passwordLengthSlider.value;
+              console.log('Generating Memorable Password with Length:', passwordLength);
               let password = '';
           
               for (let i = 0; i < passwordLength; i++) {
@@ -261,7 +270,7 @@ function genPassword() {
                       }
                   }
               }
-
+              console.log('Generated Password:', password);
               // Khadro work for saved password
           
               savePasswordToLocalStorage(password);
@@ -311,14 +320,17 @@ function genPassword() {
     textarea.value = passwordValue;
     document.body.appendChild(textarea);
     textarea.select();
+    console.log('Copying Password:', passwordValue);
 
     // provides an alert for the user and also for me to see if it worked
 
     try {
         document.execCommand("copy");
         alert("Password copied to clipboard!");
+        console.log('Password copied to clipboard!');
     } catch (err) {
         console.error("Unable to copy to clipboard", err);
+        console.log('Error copying password to clipboard:', err);
     }
 
     document.body.removeChild(textarea);
@@ -330,6 +342,7 @@ function genPassword() {
   function displaySavedPasswords() {
       const savedPasswords = getSavedPasswords().slice(-10); // Get the last ten passwords
       const savedPasswordsList = document.getElementById('savedPasswordsList');
+      console.log('Saved Passwords:', savedPasswords);
 
       // Clear the existing list
       savedPasswordsList.innerHTML = "";
