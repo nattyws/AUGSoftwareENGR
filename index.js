@@ -26,33 +26,77 @@ function genPassword() {
     }
 
 
-
-
-    
-
-  
-
-    
-
-   
-
-
-
-
-
-
-
     var dropdownMenu = document.getElementById("dropdown");
     dropdownMenu.addEventListener('change', () => {
         var selectedOption = dropdownMenu.options[dropdownMenu.selectedIndex].value;
         console.log('Selected Dropdown Option:', selectedOption);
         var sharedDiv = document.getElementById("sharedDiv");
+       
+
+        if (selectedOption === 'random') {
+          // This checkbox is for random numbers
+          var numberCheckbox = document.createElement('input');
+          numberCheckbox.type = "checkbox";
+          numberCheckbox.name = "number";
+          numberCheckbox.value = "randomNumber";
+          numberCheckbox.id = "number";
+          // numberCheckbox.checked = false;
+          var labelNum = document.createElement('label')
+          labelNum.htmlFor = "number";
+          labelNum.id = "random";
+          labelNum.appendChild(document.createTextNode('Numbers'));
+           // This checkbox is for random symbols
+          var symbolsCheckbox = document.createElement('input');
+          symbolsCheckbox.type = "checkbox";
+          symbolsCheckbox.name = "symbols";
+          symbolsCheckbox.value = "randomSymbol";
+          symbolsCheckbox.id = "symbols";
+          var labelSymbol = document.createElement('label')
+          labelSymbol.htmlFor = "symbols";
+          labelSymbol.id = "random2";
+          labelSymbol.appendChild(document.createTextNode('Symbols'));
 
 
+          /** 
+           * generateRandomPassByButton is a function which you can generate a random password using the generate button
+          */
+          function generateRandomPassByButton() {
+              const numbers = document.getElementById('number').checked;
+              const symbols = document.getElementById('symbols').checked;
+              const theLengthOfThePassowrd = passwordLengthSlider.value;
 
+              if (numbers && symbols) {
+                  console.log("Both numbers and symbols were checked");
+                  const listOfSymbols = "!@#$%^&*()_-~";
+                  let result = '';
+                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                      randomNumber = Math.floor(Math.random() * 100);
+                      pickSymbolRandomly = Math.floor(Math.random() * 13);
+                      result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
+                  }
+                  passwordOutput.textContent = result;
 
+              }else if (numbers && !symbols) {
+                  console.log("only numbers was checked");
+                   let result = '';
+                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                      randomNumber = Math.floor(Math.random() * 100);
+                      result += randomNumber + "-";
+                  }
+                  passwordOutput.textContent = result;
+              }else if (!numbers && symbols) {
+                  console.log("only symbols was checked");
+                  const listOfSymbols = "!@#$%^&*()_-~";
+                  let result = '';
 
+                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                      pickSymbolRandomly = Math.floor(Math.random() * 13);
+                      result += listOfSymbols.charAt(pickSymbolRandomly)  
+                  }
+                  passwordOutput.textContent = result;
+              }
 
+          }
 
         // This checkbox is for random numbers
             var numberCheckbox = document.createElement('input');
@@ -169,11 +213,40 @@ function genPassword() {
                 }
                 
 
-            }
+              if (numbers && symbols) {
+                  console.log("Both numbers and symbols were checked");
+                  const listOfSymbols = "!@#$%^&*()_-~";
+                  let result = '';
+                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                      randomNumber = Math.floor(Math.random() * 100);
+                      pickSymbolRandomly = Math.floor(Math.random() * 13);
+                      result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
+                  }
+                  passwordOutput.textContent = result;
 
-       
+              }else if (numbers && !symbols) {
+                  console.log("only numbers was checked");
+                   let result = '';
+                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                      randomNumber = Math.floor(Math.random() * 100);
+                      result += randomNumber + "-";
+                  }
+                  passwordOutput.textContent = result;
+              }else if (!numbers && symbols) {
+                  console.log("only symbols was checked");
+                  const listOfSymbols = "!@#$%^&*()_-~";
+                  let result = '';
 
-        if (selectedOption === 'random') {
+                  for (let i = 0; i < theLengthOfThePassowrd; i++) {
+                      pickSymbolRandomly = Math.floor(Math.random() * 13);
+                      result += listOfSymbols.charAt(pickSymbolRandomly)  
+                  }
+                  passwordOutput.textContent = result;
+              }
+              
+
+          }
+
             document.getElementById("sharedDiv").innerHTML = "";
             //create Numbers and Sympoles checkboxes
          
@@ -194,22 +267,6 @@ function genPassword() {
 
 
 
-
-            
-            
-
-
-
-
-            
-
-
-
-
-
-
-
-
         } else if (selectedOption === 'memorable') {
             document.getElementById("sharedDiv").innerHTML = "";
 
@@ -224,21 +281,23 @@ function genPassword() {
             labelCab.id = "memo1";
             labelCab.appendChild(document.createTextNode('Capitalize'));
 
-            var fullWordsCheckbox = document.createElement('input');
-            fullWordsCheckbox.type = "checkbox";
-            fullWordsCheckbox.name = "fullWords";
-            fullWordsCheckbox.value = "MemorablefullWords";
-            fullWordsCheckbox.id = "fullWords";
+            var numbersCheckbox = document.createElement('input');
+            numbersCheckbox.type = "checkbox";
+            numbersCheckbox.name = "numbers";
+            numbersCheckbox.value = "Memorablenumbers";
+            numbersCheckbox.id = "numbers";
             var labelFull = document.createElement('label')
-            labelFull.htmlFor = "fullWords";
+            labelFull.htmlFor = "numbers";
             labelFull.id = "memo2";
-            labelFull.appendChild(document.createTextNode('Full Words'));
+            labelFull.appendChild(document.createTextNode('Numbers'));
 
             sharedDiv.appendChild(capitalizeCheckbox);
             sharedDiv.appendChild(labelCab);
 
-            sharedDiv.appendChild(fullWordsCheckbox);
+            sharedDiv.appendChild(numbersCheckbox);
             sharedDiv.appendChild(labelFull);
+
+            
 
             async function fetchRandomWord() {
                 try {
@@ -254,6 +313,9 @@ function genPassword() {
             async function generateMemPassword() {
               const passwordLength = passwordLengthSlider.value;
               console.log('Generating Memorable Password with Length:', passwordLength);
+              const numberized = document.getElementById('numbers').checked;
+              const capitalized = document.getElementById('capitalize').checked;
+
               let password = '';
           
               for (let i = 0; i < passwordLength; i++) {
@@ -270,7 +332,28 @@ function genPassword() {
                       }
                   }
               }
+
               console.log('Generated Password:', password);
+              
+              if (capitalized && !numberized){
+                password = password.charAt(0).toUpperCase() + password.slice(1);
+              }
+              else if (!capitalized && numberized){
+                var randomNumber = (Math.floor(Math.random() * 100).toString());
+                password = password.concat(randomNumber)
+                
+              }
+              else if (!capitalized && !numberized){
+                password = password
+              }
+
+              else if(capitalized && numberized){
+                password = password.charAt(0).toUpperCase() + password.slice(1);
+                var randomNumber = (Math.floor(Math.random() * 100).toString());
+                password = password.concat(randomNumber)
+              }
+
+
               // Khadro work for saved password
           
               savePasswordToLocalStorage(password);
@@ -285,23 +368,7 @@ function genPassword() {
           document.getElementById("sharedDiv").innerHTML = "";
         }
 
-
-
-       
-
-
   });
-
-
-
-  
-
-
-
-
-
-
-
 
 
   savedPasswordsBtn.addEventListener('click', displaySavedPasswords);
