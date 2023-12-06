@@ -74,95 +74,98 @@ function genPassword() {
             labelSymbol.id = "random2";
             labelSymbol.appendChild(document.createTextNode('Symbols'));
 
+         
 
             /** 
              * generateRandomPassByButton is a function which you can generate a random password using the generate button
             */
-            function generateRandomPassByButton() {
-                const numbers = document.getElementById('number').checked;
-                const symbols = document.getElementById('symbols').checked;
-                const theLengthOfThePassowrd = passwordLengthSlider.value;
+          // ...
 
-                if (numbers && symbols) {
-                    console.log("Both numbers and symbols were checked");
-                    const listOfSymbols = "!@#$%^&*()_-~";
-                    let result = '';
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        randomNumber = Math.floor(Math.random() * 100);
-                        pickSymbolRandomly = Math.floor(Math.random() * 13);
-                        result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
-                    }
-                    passwordOutput.textContent = result;
+let result; // Declare result in a common scope
 
+/** 
+ * generateRandomPassByButton is a function which you can generate a random password using the generate button
+ */
+async function generateRandomPassByButton() {
+    const numbers = document.getElementById('number').checked;
+    const symbols = document.getElementById('symbols').checked;
+    const theLengthOfThePassowrd = passwordLengthSlider.value;
 
+    if (numbers && symbols) {
+        console.log("Both numbers and symbols were checked");
+        const listOfSymbols = "!@#$%^&*()_-~";
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            randomNumber = Math.floor(Math.random() * 100);
+            pickSymbolRandomly = Math.floor(Math.random() * 13);
+            result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
+        }
+        passwordOutput.textContent = result;
+    } else if (numbers && !symbols) {
+        console.log("only numbers was checked");
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            randomNumber = Math.floor(Math.random() * 100);
+            result += randomNumber + "-";
+        }
+        passwordOutput.textContent = result;
+    } else if (!numbers && symbols) {
+        console.log("only symbols was checked");
+        const listOfSymbols = "!@#$%^&*()_-~";
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            pickSymbolRandomly = Math.floor(Math.random() * 13);
+            result += listOfSymbols.charAt(pickSymbolRandomly);
+        }
+        passwordOutput.textContent = result;
+    }
 
-                }else if (numbers && !symbols) {
-                    console.log("only numbers was checked");
-                     let result = '';
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        randomNumber = Math.floor(Math.random() * 100);
-                        result += randomNumber + "-";
-                    }
-                    passwordOutput.textContent = result;
-                }else if (!numbers && symbols) {
-                    console.log("only symbols was checked");
-                    const listOfSymbols = "!@#$%^&*()_-~";
-                    let result = '';
+    await savePasswordToLocalStorage(result);
+}
 
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        pickSymbolRandomly = Math.floor(Math.random() * 13);
-                        result += listOfSymbols.charAt(pickSymbolRandomly)  
-                    }
-                    passwordOutput.textContent = result;
-                }
+/**
+ * generateRandomPassBySlider is a function which you can generate a random password using the slider range.
+ */
+async function generateRandomPassBySlider() {
+    const numbers = document.getElementById('number').checked;
+    const symbols = document.getElementById('symbols').checked;
+    const theLengthOfThePassowrd = passwordLengthSlider.value;
 
-            }
+    if (numbers && symbols) {
+        console.log("Both numbers and symbols were checked");
+        const listOfSymbols = "!@#$%^&*()_-~";
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            randomNumber = Math.floor(Math.random() * 100);
+            pickSymbolRandomly = Math.floor(Math.random() * 13);
+            result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
+        }
+        passwordOutput.textContent = result;
 
+    } else if (numbers && !symbols) {
+        console.log("only numbers was checked");
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            randomNumber = Math.floor(Math.random() * 100);
+            result += randomNumber + "-";
+        }
+        passwordOutput.textContent = result;
+    } else if (!numbers && symbols) {
+        console.log("only symbols was checked");
+        const listOfSymbols = "!@#$%^&*()_-~";
+        result = '';
+        for (let i = 0; i < theLengthOfThePassowrd; i++) {
+            pickSymbolRandomly = Math.floor(Math.random() * 13);
+            result += listOfSymbols.charAt(pickSymbolRandomly);
+        }
+        passwordOutput.textContent = result;
+    }
 
+    await savePasswordToLocalStorage(result);
+}
 
+// ...
 
-
-            /**
-             * generateRandomPassBySlider is a function which you can generate a random password using the slider range.
-             */
-            function generateRandomPassBySlider() {
-                const numbers = document.getElementById('number').checked;
-                const symbols = document.getElementById('symbols').checked;
-                const theLengthOfThePassowrd = passwordLengthSlider.value;
-
-                if (numbers && symbols) {
-                    console.log("Both numbers and symbols were checked");
-                    const listOfSymbols = "!@#$%^&*()_-~";
-                    let result = '';
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        randomNumber = Math.floor(Math.random() * 100);
-                        pickSymbolRandomly = Math.floor(Math.random() * 13);
-                        result += randomNumber + listOfSymbols.charAt(pickSymbolRandomly);
-                    }
-                    passwordOutput.textContent = result;
-
-                }else if (numbers && !symbols) {
-                    console.log("only numbers was checked");
-                     let result = '';
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        randomNumber = Math.floor(Math.random() * 100);
-                        result += randomNumber + "-";
-                    }
-                    passwordOutput.textContent = result;
-                }else if (!numbers && symbols) {
-                    console.log("only symbols was checked");
-                    const listOfSymbols = "!@#$%^&*()_-~";
-                    let result = '';
-
-                    for (let i = 0; i < theLengthOfThePassowrd; i++) {
-                        pickSymbolRandomly = Math.floor(Math.random() * 13);
-                        result += listOfSymbols.charAt(pickSymbolRandomly)  
-                    }
-                    passwordOutput.textContent = result;
-                }
-                
-
-            }
 
        
 
@@ -264,13 +267,14 @@ function genPassword() {
 
               // Khadro work for saved password
           
-              savePasswordToLocalStorage(password);
+            await  savePasswordToLocalStorage(password);
           
               passwordOutput.textContent = password;
           }
           
 
           generatePasswordBtn.addEventListener('click', generateMemPassword);
+
 
         } else {
           document.getElementById("sharedDiv").innerHTML = "";
