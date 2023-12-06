@@ -82,7 +82,6 @@ function genPassword() {
           // ...
 
 let result; // Declare result in a common scope
-
 /** 
  * generateRandomPassByButton is a function which you can generate a random password using the generate button
  */
@@ -164,11 +163,6 @@ async function generateRandomPassBySlider() {
     await savePasswordToLocalStorage(result);
 }
 
-// ...
-
-
-       
-
         if (selectedOption === 'random') {
             document.getElementById("sharedDiv").innerHTML = "";
             //create Numbers and Sympoles checkboxes
@@ -182,28 +176,6 @@ async function generateRandomPassBySlider() {
 
             generatePasswordBtn.addEventListener("click", generateRandomPassByButton);
             passwordLengthSlider.addEventListener("click", generateRandomPassBySlider);
-
-            
-
-
-            
-
-
-
-
-            
-            
-
-
-
-
-            
-
-
-
-
-
-
 
 
         } else if (selectedOption === 'memorable') {
